@@ -1,0 +1,45 @@
+extends layout
+
+block contenido
+  .container
+    .row
+      .col-md-8.col-sm-8.col-xs-8
+        h3= titulo
+      .col-md-3.col-sm-3.col-xs-3(style="padding-top:10px")
+        a.btn.btn-primary(href='/agregar') Agregar Usuario
+  .container-fluid
+    .row-fluid
+      .col-md-12.col-sm-12.col-xs-12
+        .panel.panel-primary
+          .panel-heading
+            h3.panel-title Listado de Usuarios
+          .panel-body
+            table.table.table-bordered
+              thead
+                tr.info
+                  th ID
+                  th usuario
+                  th correo
+                  th nivel
+                  th estado
+                  th acciones
+              tbody
+                if usuarios.length
+                  each usuario in usuarios
+                    tr.warning
+                      td= usuario._id
+                      td= usuario.usuario
+                      td= usuario.correo
+                      td= usuario.nivel
+                      td= usuario.estado
+                      td 
+                        a.btn.btn-success.btn-xs(href='/editar/' + usuario._id) Editar
+                        | &nbsp;|&nbsp;
+                        a.btn.btn-danger.btn-xs(href='/eliminar/' + usuario._id) Eliminar
+
+                else
+                  tr.danger
+                    td(colspan='6') SIN REGISTROS
+
+
+

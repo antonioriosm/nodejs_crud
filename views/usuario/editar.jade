@@ -1,0 +1,57 @@
+extends ../layout
+
+block contenido
+  .container
+    .row
+      ol.breadcrumb
+        li: a(href='/') Listado de Usuarios
+        li.active Editar Usuario
+    .row
+      .col-md-8.col-md-offset-2
+        h3 Editar Usuario
+        form.form-horizontal.well(action='/editar',method='POST')
+          input(type='hidden', name='id', value=usuario._id)
+          .form-group
+            label.col-sm-2.control-label(for='usuario') Usuario:
+            .col-md-4
+              input.form-control(type='text', name='usuario', placeholder='Usuario', value=usuario.usuario required)
+          .form-group
+            label.col-sm-2.control-label(for='correo') Correo:
+            .col-md-6
+              input.form-control(type='email', name='correo', placeholder='Correo', value=usuario.correo, required)
+          .form-group
+            label.col-sm-2.control-label(for='correo') Nivel:
+            .col-md-6
+              select.form-control(name='nivel', required)
+                option(value='Navegante') Navegante
+
+                if usuario.nivel == "Digitador"
+                  option(value='Digitador', selected) Digitador
+                else
+                  option(value='Digitador') Digitador
+                  
+                if usuario.nivel == "Supervisor"
+                  option(value='Supervisor', selected) Supervisor
+                else
+                  option(value='Supervisor') Supervisor
+                  
+                if usuario.nivel == "Administrador"
+                  option(value='Administrador', selected) Administrador
+                else
+                  option(value='Administrador') Administrador
+
+          .form-group
+            label.col-sm-2.control-label(for='estado') Estado:
+            label.radio-inline
+              if usuario.estado == 'Activo'
+                input(type='radio', name='estado', value='Activo', checked)
+              else
+                input(type='radio', name='estado', value='Activo')
+              | Activo
+            label.radio-inline
+              if usuario.estado == 'Pasivo'
+                input(type='radio', name='estado', value='Pasivo', checked)
+              else
+                input(type='radio', name='estado', value='Pasivo')
+              | Pasivo
+          input.btn.btn-primary.col-sm-offset-3(type='submit', value='Editar Usuario')

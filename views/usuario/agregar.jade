@@ -1,0 +1,38 @@
+extends ../layout
+
+block contenido
+  .container
+    .row
+      ol.breadcrumb
+        li: a(href='/') Listado de Usuarios
+        li.active Agregar Usuarios
+    .row
+      .col-md-8.col-md-offset-2
+        h3 Agregando Usuario
+        form.form-horizontal.well(action='/agregar',method='POST')
+          .form-group
+            label.col-sm-2.control-label(for='usuario') Usuario:
+            .col-md-4
+              input.form-control(type='text', name='usuario', placeholder='Usuario', required)
+          .form-group
+            label.col-sm-2.control-label(for='correo') Correo:
+            .col-md-6
+              input.form-control(type='email', name='correo', placeholder='Correo', required)
+          .form-group
+            label.col-sm-2.control-label(for='correo') Nivel:
+            .col-md-6
+              select.form-control(name='nivel', required)
+                option(value='') Seleccione
+                option(value='Navegante') Navegante
+                option(value='Digitador') Digitador
+                option(value='Supervisor') Supervisor
+                option(value='Administrador') Administrador
+          .form-group
+            label.col-sm-2.control-label(for='estado') Estado:
+            label.radio-inline
+              input(type='radio', name='estado', value='Activo', checked)
+              | Activo
+            label.radio-inline
+              input(type='radio', name='estado', value='Pasivo')
+              | Pasivo
+          input.btn.btn-primary.col-sm-offset-3(type='submit', value='Agregar Usuario')
